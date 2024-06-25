@@ -15,7 +15,7 @@ const ChuckImage = ({imageIndex}: ChuckImageProps) => {
     const images = [cn1, cn2, cn3, cn4, cn5, cn6, cn7];
 
     return (
-        <img className='h-1/3 my-32'
+        <img className='h-1/3 mb-32'
         src={images[imageIndex]} alt="Chuck Norris" />
     );
 }

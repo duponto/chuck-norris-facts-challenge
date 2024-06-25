@@ -8,7 +8,6 @@ import JokeCategoriesRow from './components/JokeCategoriesRow';
 function App() {
   
   const [joke, setJoke] = useState('');
-  //const [category, setCategory] = useState('');
   const [imageIndex, setImageIndex] = useState(0);
 
   const generateChuckNorrisJoke = async () => {
@@ -23,13 +22,9 @@ function App() {
     setImageIndex(Math.floor(Math.random() * 7));
   }
 
-  // useEffect(() => {
-  //   if(category) generateChuckNorrisJokeByCategory();
-  // }, [category])
-
-
   return (
     <div className="flex flex-col items-center h-screen">
+      <h1 className='text-4xl font-bold text-center my-8'>Chuck Norris Jokes</h1>
       <ChuckImage imageIndex={imageIndex}/>
       <JokeCategoriesRow onClickEvent={generateChuckNorrisJokeByCategory}/>
       <TextArea 
