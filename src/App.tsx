@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getJokeByCategory, getRandomJoke } from './hooks/ApiRequests'
 import Button from './components/Button';
 import TextArea from './components/TextArea';
