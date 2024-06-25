@@ -1,30 +1,29 @@
 import { useState } from 'react';
-import './App.css'
-import { fetchChuckNorrisJoke } from './hooks/ApiRequests'
+import { useGetChuckNorrisJoke } from './hooks/ApiRequests'
+import Button from './components/Button';
+import TextArea from './components/TextArea';
 
 function App() {
   
-  const [joke, setJoke] = useState('');
+  const [piada, setPiada] = useState('');
 
   const generateChuckNorrisJoke = async () => {
-    const response = await fetchChuckNorrisJoke();
-    setJoke(response);
+    const response = await useGetChuckNorrisJoke();
+    setPiada(response);
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <textarea
-        className="w-1/2 h-1/4 p-4 mb-4 border border-gray-300 rounded"
-        id='outputText'
-        value={joke}
-        readOnly
+    <div className="flex flex-col items-center justify-center h-screen">
+
+      <label className="mb-4">Output</label>
+      <TextArea 
+        value={piada} 
+        isReadOnly
       />
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-150 ease-in-out"
-        onClick={generateChuckNorrisJoke}
-      >
-        Click Me
-      </button>
+      <Button 
+        onClick={generateChuckNorrisJoke} 
+        text="Gerar Piadoca" 
+      />
     </div>
   )
 }
