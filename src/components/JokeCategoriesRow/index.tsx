@@ -1,14 +1,23 @@
-import { useGetJokesCategories } from "../../hooks/ApiRequests";
+import Button from "../Button";
 
+interface JokeCategoriesRowProps {
+    onClickEvent: any;
+}
 
-const JokeCategoriesRow = () => {
-    const categories = useGetJokesCategories();
-    
+const JokeCategoriesRow = ({onClickEvent} : JokeCategoriesRowProps) => {
+    const categories = ["animal", "career", "celebrity", "dev", "explicit", 
+        "fashion", "food", "history", "money", "movie", "music", 
+        "political", "religion", "science", "sport", "travel"];
+
     return (
-        <div>
-            {categories.map((category: any) => (
-                <JokeCategory key={category} category={category} />
-            ))}
+        <div className="flex flex-wrap space-x-4 mb-4">
+            {categories.map((category: any) => {
+                const categoryCapitalized = category.charAt(0).toUpperCase()
+                + category.slice(1)
+                return <Button key={category} text={categoryCapitalized} onClick={() => onClickEvent(category)} />
+            })}
         </div>
     );
-    }
+}
+
+export default JokeCategoriesRow

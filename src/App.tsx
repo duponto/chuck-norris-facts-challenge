@@ -1,28 +1,44 @@
-import { useState } from 'react';
-import { useGetChuckNorrisJoke } from './hooks/ApiRequests'
+import { useEffect, useState } from 'react';
+import { getJokeByCategory, getRandomJoke } from './hooks/ApiRequests'
 import Button from './components/Button';
 import TextArea from './components/TextArea';
+import ChuckImage from './components/ChuckImage';
+import JokeCategoriesRow from './components/JokeCategoriesRow';
 
 function App() {
   
-  const [piada, setPiada] = useState('');
+  const [joke, setJoke] = useState('');
+  //const [category, setCategory] = useState('');
+  const [imageIndex, setImageIndex] = useState(0);
 
   const generateChuckNorrisJoke = async () => {
-    const response = await useGetChuckNorrisJoke();
-    setPiada(response);
+    const joke = await getRandomJoke();
+    setJoke(joke);
+    setImageIndex(Math.floor(Math.random() * 7));
   }
 
-  return (
-    <div className="flex flex-col items-center justify-center h-screen">
+  const generateChuckNorrisJokeByCategory = async (category:string) => {
+    const joke = await getJokeByCategory(category);
+    setJoke(joke);
+    setImageIndex(Math.floor(Math.random() * 7));
+  }
 
-      <label className="mb-4">Output</label>
+  // useEffect(() => {
+  //   if(category) generateChuckNorrisJokeByCategory();
+  // }, [category])
+
+
+  return (
+    <div className="flex flex-col items-center h-screen">
+      <ChuckImage imageIndex={imageIndex}/>
+      <JokeCategoriesRow onClickEvent={generateChuckNorrisJokeByCategory}/>
       <TextArea 
-        value={piada} 
+        value={joke} 
         isReadOnly
       />
       <Button 
         onClick={generateChuckNorrisJoke} 
-        text="Gerar Piadoca" 
+        text="Generate Random Joke" 
       />
     </div>
   )

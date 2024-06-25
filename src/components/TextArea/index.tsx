@@ -1,14 +1,16 @@
 interface TextAreaProps {
     value: string;
     isReadOnly: boolean;
+    placeholder?: string;
 }
 
-const TextArea = ({ value, isReadOnly} : TextAreaProps) => {
+const TextArea = ({ value, isReadOnly, placeholder} : TextAreaProps) => {
     return (
         <textarea
-          className="mb-4 w-1/2 p-2 border border-gray-300 rounded"
+          className="mb-4 w-1/2 border border-gray-300 rounded"
           value={value}
           readOnly={isReadOnly}
+          placeholder={placeholder}
         ></textarea>
     );
 }
